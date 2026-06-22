@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MSP → DRO 2026 fare comparison</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel-2: #1f2937;
+      --text: #eef2ff;
+      --muted: #9ca3af;
+      --line: rgba(255,255,255,.12);
+      --blue: #7dd3fc;
+      --green: #86efac;
+      --amber: #fcd34d;
+      --red: #fca5a5;
+      --purple: #c4b5fd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top left, rgba(125,211,252,.2), transparent 32rem),
+                  radial-gradient(circle at top right, rgba(196,181,253,.18), transparent 30rem),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    main { max-width: 1180px; margin: 0 auto; padding: 48px 24px 72px; }
+    .eyebrow { color: var(--blue); text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; }
+    h1 { font-size: clamp(38px, 6vw, 76px); line-height: .95; margin: 12px 0 18px; letter-spacing: -0.06em; }
+    .subtitle { color: var(--muted); max-width: 760px; font-size: 19px; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 22px; margin-top: 34px; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border: 1px solid var(--line); border-radius: 24px; padding: 24px; box-shadow: 0 24px 80px rgba(0,0,0,.28); }
+    .winner { border-color: rgba(134,239,172,.42); }
+    .price { font-size: 58px; font-weight: 900; letter-spacing: -0.06em; margin: 4px 0; color: var(--green); }
+    .tag { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; color: var(--muted); font-size: 13px; }
+    .meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+    .meta div { background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+    .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; }
+    .value { margin-top: 5px; font-weight: 750; }
+    h2 { font-size: 30px; letter-spacing: -0.03em; margin: 42px 0 16px; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+    th, td { padding: 14px 13px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; background: rgba(255,255,255,.04); }
+    tr:last-child td { border-bottom: 0; }
+    .good { color: var(--green); font-weight: 800; }
+    .warn { color: var(--amber); font-weight: 800; }
+    .bad { color: var(--red); font-weight: 800; }
+    .pill { display: inline-block; border-radius: 999px; padding: 4px 9px; font-size: 12px; font-weight: 800; background: rgba(125,211,252,.12); color: var(--blue); }
+    .note { color: var(--muted); font-size: 14px; margin-top: 12px; }
+    .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    @media (max-width: 820px) { .hero-grid, .two, .meta { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 10px 8px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">flight search asset · live google flights review</div>
+    <h1>MSP → DRO weekend fare comparison</h1>
+    <p class="subtitle">candidate 2026 summer weekends from minneapolis to durango, colorado. optimized for late departure home, united via denver where practical, and carry-on awareness.</p>
+
+    <section class="hero-grid">
+      <article class="card winner">
+        <span class="tag">recommended · carry-on included</span>
+        <div class="price">$553</div>
+        <h2 style="margin:0 0 8px">thu aug 27 → mon aug 31</h2>
+        <p class="subtitle" style="font-size:16px">united via DEN both ways. cheaper than the comparable sunday return, includes a carry-on, and gives an extra monday in durango.</p>
+        <div class="meta">
+          <div><div class="label">outbound</div><div class="value">5:04 pm MSP → 8:54 pm DRO<br>1h20m DEN</div></div>
+          <div><div class="label">return</div><div class="value">6:00 pm DRO → 11:58 pm MSP<br>1h27m DEN</div></div>
+          <div><div class="label">bags</div><div class="value good">1 carry-on included</div></div>
+          <div><div class="label">booking view</div><div class="value">best practical pick</div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">cheapest · basic-ish</span>
+        <div class="price" style="color:var(--amber)">$343</div>
+        <h2 style="margin:0 0 8px">fri aug 28 → mon aug 31</h2>
+        <p class="subtitle" style="font-size:16px">excellent fare if personal-item-only is acceptable. google showed 0 carry-on included, so regular economy would likely cost more.</p>
+        <div class="meta">
+          <div><div class="label">outbound</div><div class="value">6:29 pm MSP → 10:00 pm DRO<br>55m DEN</div></div>
+          <div><div class="label">return</div><div class="value">6:00 pm DRO → 11:58 pm MSP<br>1h27m DEN</div></div>
+          <div><div class="label">bags</div><div class="value warn">0 carry-on shown</div></div>
+          <div><div class="label">tradeoff</div><div class="value">lowest fare, likely basic</div></div>
+        </div>
+      </article>
+    </section>
+
+    <h2>monday-return short list</h2>
+    <table>
+      <thead><tr><th>dates</th><th>fare</th><th>outbound</th><th>monday return</th><th>bag/basic signal</th></tr></thead>
+      <tbody>
+        <tr><td>fri 8/28 → mon 8/31</td><td class="good">$343</td><td>united 6:29 pm → 10:00 pm via DEN</td><td>6:00 pm → 11:58 pm via DEN</td><td class="warn">0 carry-on</td></tr>
+        <tr><td>fri 7/10 → mon 7/13</td><td>$364</td><td>united 6:23 pm → 10:00 pm via DEN</td><td>6:05 pm → 11:59 pm via DEN</td><td class="warn">0 carry-on</td></tr>
+        <tr><td>fri 7/17 → mon 7/20</td><td>$367</td><td>united 6:23 pm → 10:00 pm via DEN</td><td>6:05 pm → 11:59 pm via DEN</td><td class="warn">0 carry-on</td></tr>
+        <tr><td>thu 8/27 → mon 8/31</td><td class="good">$553</td><td>united 5:04 pm → 8:54 pm via DEN</td><td>6:00 pm → 11:58 pm via DEN</td><td class="good">1 carry-on</td></tr>
+        <tr><td>thu 7/16 → mon 7/20</td><td>$566</td><td>american 3:11 pm → 10:15 pm via DFW</td><td>5:06 pm → 11:57 pm via DFW</td><td class="good">1 carry-on</td></tr>
+        <tr><td>thu 8/20 → mon 8/24</td><td>$668</td><td>united 6:29 pm → 10:00 pm via DEN</td><td>6:00 pm → 11:58 pm via DEN</td><td class="good">1 carry-on</td></tr>
+        <tr><td>fri 7/24 → mon 7/27</td><td>$689</td><td>united 6:23 pm → 10:00 pm via DEN</td><td>6:05 pm → 11:59 pm via DEN</td><td class="good">1 carry-on</td></tr>
+      </tbody>
+    </table>
+
+    <section class="two">
+      <article class="card">
+        <h2 style="margin-top:0">booking guidance</h2>
+        <p>DRO is small and late DEN connections are constrained. google marked prices typical, not unusually high. book once dates are firm; the risk is more likely upward than a major drop.</p>
+      </article>
+      <article class="card">
+        <h2 style="margin-top:0">key caveat</h2>
+        <p>google’s “0 carry-on included” signal should be treated as basic economy / personal-item-only. for carry-on-only travel, compare against regular economy before purchase.</p>
+      </article>
+    </section>
+
+    <p class="note">compiled from live google flights checks; fares can change quickly.</p>
+  </main>
+</body>
+</html>
