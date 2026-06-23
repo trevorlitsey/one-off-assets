@@ -13,7 +13,10 @@ async function init(){
   L.circleMarker([data.home.lat,data.home.lon],{radius:7,color:'#fff',fillColor:'#c6f26b',fillOpacity:1,weight:2}).addTo(state.map).bindPopup('home area used for drive estimates');
   ['search','drive','gravel','minMiles','maxMiles','sort'].forEach(id=>$(id).addEventListener('input',render));
   render();
-  if(location.hash){const id=location.hash.slice(1); setTimeout(()=>selectRoute(id),100)}
+  window.addEventListener('resize',()=>setTimeout(refreshMapLayout,120));
+  if(window.visualViewport) window.visualViewport.addEventListener('resize',()=>setTimeout(refreshMapLayout,120));
+  [150,600,1200,2200].forEach(ms=>setTimeout(refreshMapLayout,ms));
+  if(location.hash){const id=location.hash.slice(1); setTimeout(()=>selectRoute(id),180)}
 }
 function render(){
   const q=$('search').value.trim().toLowerCase(), maxDrive=+$('drive').value, minGravel=+$('gravel').value, minMiles=+$('minMiles').value, maxMiles=+$('maxMiles').value;
@@ -24,6 +27,23 @@ function render(){
   routes.sort((a,b)=> sort==='distance'?a.distanceMi-b.distanceMi:sort==='gravel'?(b.surface.gravelPct-a.surface.gravelPct):sort==='gain'?((b.elevationGainFt||0)-(a.elevationGainFt||0)):a.driveMinutes-b.driveMinutes);
   state.filtered=routes;
   drawMap(routes); drawList(routes); drawStats(routes);
+}
+function routeBounds(routes){
+  const bounds=[];
+  routes.forEach(r=>r.coordinates.forEach(c=>bounds.push(c)));
+  return bounds;
+}
+function fitRoutes(routes){
+  const bounds=routeBounds(routes);
+  if(bounds.length) state.map.fitBounds(bounds,{padding:[30,30],animate:false});
+}
+function refreshMapLayout(){
+  if(!state.map) return;
+  state.map.invalidateSize({pan:false});
+  if(state.active){
+    const layer=state.layers.get(state.active);
+    if(layer) state.map.fitBounds(layer.getBounds(),{padding:[40,40],animate:false});
+  } else if(state.filtered.length) fitRoutes(state.filtered);
 }
 function drawMap(routes){
   for(const [id,l] of state.layers){ if(!routes.find(r=>r.id===id)){state.map.removeLayer(l); state.layers.delete(id);} }
@@ -36,7 +56,7 @@ function drawMap(routes){
     } else { layer.setStyle({color:routeColor(r),weight:state.active===r.id?7:4,opacity:state.active===r.id?1:.8}); }
     r.coordinates.forEach(c=>bounds.push(c));
   }
-  if(bounds.length && !state.active) state.map.fitBounds(bounds,{padding:[30,30]});
+  if(bounds.length && !state.active) fitRoutes(routes);
 }
 function drawList(routes){
   const list=$('routeList'); list.innerHTML=''; const tpl=$('routeCardTemplate');
