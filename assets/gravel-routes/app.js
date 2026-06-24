@@ -9,7 +9,13 @@ async function init(){
   state.routes=data.routes;
   state.map=L.map('map',{zoomControl:false}).setView([44.96,-93.25],9);
   L.control.zoom({position:'topright'}).addTo(state.map);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; openstreetmap'}).addTo(state.map);
+  const baseTiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+    subdomains:'abcd',
+    maxZoom:19,
+    detectRetina:true,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">openstreetmap</a> contributors &copy; <a href="https://carto.com/attributions">carto</a>'
+  }).addTo(state.map);
+  baseTiles.on('tileerror',()=>console.warn('base map tile failed to load; carto cdn may be temporarily unavailable'));
   L.circleMarker([data.home.lat,data.home.lon],{radius:7,color:'#fff',fillColor:'#c6f26b',fillOpacity:1,weight:2}).addTo(state.map).bindPopup('home area used for drive estimates');
   ['search','drive','gravel','minMiles','maxMiles','sort'].forEach(id=>$(id).addEventListener('input',render));
   render();
